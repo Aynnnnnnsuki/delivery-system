@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>商家中心</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+<div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+    <h2>👨‍🍳 商家管理后台</h2>
+    <div>
+        <!-- 新增的跳转按钮 -->
+        <a href="/merchant/orders" class="btn btn-warning btn-lg me-2">
+            📦 订单调度中心 <span class="badge bg-danger rounded-pill">!</span>
+        </a>
+
+        <a href="/logout" class="btn btn-outline-secondary">退出登录</a>
+    </div>
+</div>
+<div class="d-flex justify-content-between">
+    <h2>我的菜单管理</h2>
+    <a href="/logout" class="btn btn-secondary">退出</a>
+</div>
+
+<!-- 添加菜品表单 -->
+<div class="card my-3 p-3 bg-light">
+    <h5>发布新菜品</h5>
+    <form action="/merchant/add" method="post" class="row g-3">
+        <div class="col-md-4">
+            <input type="text" name="name" class="form-control" placeholder="菜品名称" required>
+        </div>
+        <div class="col-md-3">
+            <input type="number" step="0.01" name="price" class="form-control" placeholder="价格" required>
+        </div>
+        <div class="col-md-3">
+            <input type="number" name="stock" class="form-control" placeholder="库存" value="100">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-success w-100">添加</button>
+        </div>
+    </form>
+</div>
+
+<!-- 菜品列表 -->
+<table class="table table-bordered">
+    <thead>
+    <tr><th>ID</th><th>菜名</th><th>价格</th><th>库存</th></tr>
+    </thead>
+    <tbody>
+    <tr th:each="dish : ${dishes}">
+        <td th:text="${dish.dishId}"></td>
+        <td th:text="${dish.name}"></td>
+        <td th:text="${dish.price}"></td>
+        <td th:text="${dish.stock}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
